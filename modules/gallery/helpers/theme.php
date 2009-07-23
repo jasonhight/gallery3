@@ -48,6 +48,8 @@ class theme_Core {
     $group->input("thumb_size")->label(t("Thumbnail size (in pixels)"))->id("gThumbSize")
       ->rules("required|valid_digit")
       ->value(module::get_var("gallery", "thumb_size"));
+    $group->checkbox("thumb_squares")->label(t("Generate square thumbnails (only works with ImageMagick and GraphicsMagick)"))->id("gThumbSquares")
+      ->checked(module::get_var("gallery", "thumb_squares"));
     $group->input("resize_size")->label(t("Resized image size (in pixels)"))->id("gResizeSize")
       ->rules("required|valid_digit")
       ->value(module::get_var("gallery", "resize_size"));

@@ -2,6 +2,7 @@
 /**
  * Manipulate images using standard methods such as resize, crop, rotate, etc.
  * This class must be re-initialized for every image you wish to manipulate.
+ * From gallery3/system/libraries
  *
  * $Id: Image.php 4072 2009-03-13 17:20:38Z jheathco $
  *
@@ -17,6 +18,7 @@ class Image_Core {
 	const AUTO = 2;
 	const HEIGHT = 3;
 	const WIDTH = 4;
+	const SQUARE = 7;
 	// Flip Directions
 	const HORIZONTAL = 5;
 	const VERTICAL = 6;
@@ -147,7 +149,7 @@ class Image_Core {
 	 * @throws  Kohana_Exception
 	 * @param   integer  width
 	 * @param   integer  height
-	 * @param   integer  one of: Image::NONE, Image::AUTO, Image::WIDTH, Image::HEIGHT
+	 * @param   integer  one of: Image::NONE, Image::AUTO, Image::WIDTH, Image::HEIGHT, Image::SQUARE
 	 * @return  object
 	 */
 	public function resize($width, $height, $master = NULL)
@@ -447,6 +449,7 @@ class Image_Core {
 			break;
 			case 'master':
 				if ($value !== Image::NONE AND
+				    $value !== Image::SQUARE AND
 				    $value !== Image::AUTO AND
 				    $value !== Image::WIDTH AND
 				    $value !== Image::HEIGHT)

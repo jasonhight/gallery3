@@ -161,6 +161,11 @@ class Image_ImageMagick_Driver extends Image_Driver {
 			case Image::NONE:   // WxH!
 				$dim = escapeshellarg($prop['width'].'x'.$prop['height'].'!');
 			break;
+			case Image::SQUARE: // funky IM syntax for creation of square thumbs
+				// Can't use escapeshellarg() here because it's not just a single argument this time.
+				// Would be easier if everybody had the latest IM, but this way is more compatible.
+				$dim = 'x'.(2 * $prop['height']).' -resize \''.(2 * $prop['width']).'x<\' -resize 50\% -gravity center -crop '.$prop['width'].'x'.$prop['height'].'+0+0 +repage';
+			break;
 		}
 
 		// Use "convert" to change the width and height
@@ -171,6 +176,7 @@ class Image_ImageMagick_Driver extends Image_Driver {
 		}
 
 		return TRUE;
+
 	}
 
 	public function rotate($amt)

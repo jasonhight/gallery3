@@ -382,3 +382,4 @@ INSERT INTO {vars} VALUES (21,'gallery','time_format','H:i:s');
 INSERT INTO {vars} VALUES (22,'gallery','show_credits','1');
 INSERT INTO {vars} VALUES (23,'gallery','credits','Powered by <a href=\"%url\">Gallery %version</a>');
 INSERT INTO {vars} VALUES (25,'comment','spam_caught','0');
+INSERT INTO {vars} VALUES (64,'gallery','thumb_squares','0');

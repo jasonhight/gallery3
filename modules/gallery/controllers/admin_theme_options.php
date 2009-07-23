@@ -34,12 +34,23 @@ class Admin_Theme_Options_Controller extends Admin_Controller {
 
       $thumb_size = $form->edit_theme->thumb_size->value;
       $thumb_dirty = false;
-      if (module::get_var("gallery", "thumb_size") != $thumb_size) {
+      $thumb_squares = $form->edit_theme->thumb_squares->value;
+      $toolkit = module::get_var("gallery", "graphics_toolkit");
+      if (module::get_var("gallery", "thumb_size") != $thumb_size OR
+          module::get_var("gallery", "thumb_squares") != $thumb_squares) {
         graphics::remove_rule("gallery", "thumb", "resize");
-        graphics::add_rule(
-          "gallery", "thumb", "resize",
-          array("width" => $thumb_size, "height" => $thumb_size, "master" => Image::AUTO),
-          100);
+	if($thumb_squares AND $toolkit != "gd"){
+		graphics::add_rule(
+        	  "gallery", "thumb", "resize",
+      		  array("width" => $thumb_size, "height" => $thumb_size, "master" => Image::SQUARE),
+		  100);
+	}else{
+		graphics::add_rule(
+        	  "gallery", "thumb", "resize",
+      		  array("width" => $thumb_size, "height" => $thumb_size, "master" => Image::AUTO),
+		  100);
+	}
+	module::set_var("gallery", "thumb_squares", $thumb_squares);
         module::set_var("gallery", "thumb_size", $thumb_size);
       }
 

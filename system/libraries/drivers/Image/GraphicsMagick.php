@@ -160,6 +160,10 @@ class Image_GraphicsMagick_Driver extends Image_Driver {
 			case Image::NONE:   // WxH!
 				$dim = escapeshellarg($prop['width'].'x'.$prop['height'].'!');
 			break;
+			case Image::SQUARE: // This should work to make square thumbs in GM
+					    // Completely untested unfortunately.
+				$dim = $prop['width'].'x'.$prop['height'].'\^ -crop '.$prop['width'].'x'.$prop['height'].' -gravity center';
+			break;
 		}
 
 		// Use "convert" to change the width and height
